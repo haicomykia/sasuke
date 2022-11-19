@@ -1,3 +1,4 @@
 /.dockervenv
 /.venv
 /src
+/pyproject.toml
