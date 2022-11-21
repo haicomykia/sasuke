@@ -1,5 +1,22 @@
 version: '3'
 services:
+  # --------------------------------------------
+  web:
+    image: jwilder/nginx-proxy:latest
+    container_name: nginx
+    ports:
+      - 80:80
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./nginx/network_internal.conf:/etc/nginx/network_internal.conf
+      - ./nginx/logs:/var/log/nginx
+    environment:
+       - TZ=Asia/Tokyo
+    depends_on:
+      - demo-app
+    networks:
+      - nginx_network
+  # --------------------------------------------
   demo-app:
     build: .
     container_name: app
@@ -7,18 +24,12 @@ services:
       - .dockervenv:/src/.venv
       - .:/src
     ports:
-      - 8000:8000  # ホストマシンのポート8000を、docker内のポート8000に接続する
-  web:
-    image: nginx:latest
-    container_name: nginx
-    volumes:
-      - .:/usr/local/apache2/htdocs/
-    ports:
-      - 80:80
-    volumes:
-      - ./nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
-    depends_on:
-      - demo-app
+      - 8000:8000
+    environment:
+      VIRTUAL_HOST: app.localhost
+    networks:
+      - nginx_network
+  # --------------------------------------------
   postgres:
     image: postgres:latest
     container_name: postgresql
@@ -32,7 +43,9 @@ services:
       - 55000:5432
     volumes:
       - postgres:/var/lib/postgresql/data
-    
+    networks:
+      - nginx_network
+  # --------------------------------------------
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin
@@ -41,10 +54,18 @@ services:
     environment:
       PGADMIN_DEFAULT_EMAIL: starry.eyed.chronicle@tagarasu-keiei.jp
       PGADMIN_DEFAULT_PASSWORD: 7eC3EERnvje
+      TZ: "Asia/Tokyo"
+      VIRTUAL_HOST: pgadmin.localhost
     volumes:
       - pgadmin:/var/lib/pgadmin
     depends_on:
       - postgres
+    networks:
+      - nginx_network
+  # --------------------------------------------
 volumes:
   postgres:
   pgadmin:
+networks:
+  nginx_network:
+      driver: bridge
