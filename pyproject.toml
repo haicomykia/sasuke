@@ -3,13 +3,17 @@ name = "demo-app"
 version = "0.1.0"
 description = ""
 authors = ["tagarasu"]
-readme = "README.md"
-packages = [{include = "demo_app"}]
+packages = [
+    {include = "api/models"},
+]
 
 [tool.poetry.dependencies]
 python = "^3.10"
 fastapi = "^0.86.0"
 uvicorn = {extras = ["standard"], version = "^0.19.0"}
+alembic = "^1.8.1"
+python-dotenv = "^0.21.0"
+psycopg2 = "^2.9.5"
 
 
 [build-system]

@@ -159,7 +159,8 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 .idea/
 
-pyproject.toml
-
 # nginx log
 /nginx/logs
+
+# alembic auto-generated migration files
+api/db/alembic/versions/*.py
