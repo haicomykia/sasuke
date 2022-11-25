@@ -11,7 +11,7 @@ services:
       - ./nginx/network_internal.conf:/etc/nginx/network_internal.conf
       - ./nginx/logs:/var/log/nginx
     environment:
-       - TZ=Asia/Tokyo
+      - TZ=Asia/Tokyo
     depends_on:
       - demo-app
     networks:
