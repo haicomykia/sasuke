@@ -5,7 +5,8 @@ app = FastAPI()
 
 @app.get("/")
 async def root():
-    return {"message": "hello world!"}
+    message: str = "Hello, FastAPI!"
+    return {"message": message}
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", port=8000)
+    uvicorn.run("app", port=8000)
