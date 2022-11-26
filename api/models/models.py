@@ -45,3 +45,18 @@ class AccountTitle(ModelBase):
     deleted_at = Column(Timestamp, default=current_timestamp(), comment="削除日")
 
 
+class SalaryTypes(ModelBase):
+    """
+    給与種別マスタ
+    """
+    __tablename__ = 'm_salary_types'
+    __table_args__ = {
+        'comment': '給与種別マスタ'
+    }
+
+    salary_type_id = Column(Integer, primary_key=True, autoincrement=True, comment="給与種別ID")
+    name = Column(Unicode(10), comment="名称")
+    version_id = Column(Integer, default=1, nullable=False, comment="バージョンID")
+    created_at = Column(Timestamp, default=current_timestamp(), nullable=False, comment="作成日")
+    updated_at = Column(Timestamp, default=current_timestamp(), nullable=False, comment="更新日")
+    deleted_at = Column(Timestamp, default=current_timestamp(), comment="削除日")
