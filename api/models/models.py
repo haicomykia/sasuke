@@ -43,3 +43,5 @@ class AccountTitle(ModelBase):
     created_at = Column(Timestamp, default=current_timestamp(), nullable=False, comment="作成日")
     updated_at = Column(Timestamp, default=current_timestamp(), nullable=False, comment="更新日")
     deleted_at = Column(Timestamp, default=current_timestamp(), comment="削除日")
+
+
