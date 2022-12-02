@@ -1,4 +1,4 @@
-# python3.9のイメージをダウンロード
+# api
 FROM python:3.10-buster
 ENV PYTHONUNBUFFERED=1
 

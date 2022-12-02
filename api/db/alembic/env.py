@@ -1,12 +1,11 @@
 import os
 from logging.config import fileConfig
-
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
-
 from alembic import context
-
 from dotenv import load_dotenv
+from api.models.models import ModelBase
+from api.models import m_kanjo_kamoku_groups, m_salary_types, m_kanjo_kamoku
 
 # load .env
 load_dotenv()
@@ -25,8 +24,7 @@ if config.config_file_name is not None:
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-from api.models.models import ModelBase as Base
-target_metadata = Base.metadata
+target_metadata = ModelBase.metadata
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:

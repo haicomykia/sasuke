@@ -1,3 +1,4 @@
+import os
 from fastapi import FastAPI
 
 app = FastAPI()
@@ -5,7 +6,7 @@ app = FastAPI()
 
 @app.get("/")
 async def root():
-    message: str = "Hello, FastAPI!"
+    message = 'リレーかもめ'
     return {"message": message}
 
 if __name__ == "__main__":
