@@ -64,6 +64,20 @@ services:
     networks:
       - nginx_network
   # --------------------------------------------
+  streamlit:
+    build: 
+      context: ./docker/streamlit
+    container_name: streamlit
+    ports:
+      - 8501:8501
+    command: "run src/front/main.py"
+    environment:
+      VIRTUAL_HOST: front.localhost
+    volumes:
+      - ./front/:/src/front
+    networks:
+      - nginx_network
+  # --------------------------------------------
 volumes:
   postgres:
   pgadmin:
