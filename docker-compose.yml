@@ -66,7 +66,7 @@ services:
   # --------------------------------------------
   streamlit:
     build: 
-      context: ./docker/streamlit
+      context: ./front
     container_name: streamlit
     ports:
       - 8501:8501
