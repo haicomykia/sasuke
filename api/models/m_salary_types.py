@@ -1,6 +1,6 @@
 import os
 from sqlalchemy import Column, Integer, Unicode
-from api.models.models import ModelBase
+from models.models import ModelBase
 
 
 class SalaryTypes(ModelBase):

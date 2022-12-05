@@ -4,8 +4,8 @@ from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 from alembic import context
 from dotenv import load_dotenv
-from api.models.models import ModelBase
-from api.models import m_kanjo_kamoku_groups, m_salary_types, m_kanjo_kamoku
+from models.models import ModelBase
+from models import m_kanjo_kamoku_groups, m_salary_types, m_kanjo_kamoku
 
 # load .env
 load_dotenv()
