@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, Unicode, ForeignKey
-from api.models.models import ModelBase
+from models.models import ModelBase
 
 
 class AccountTitles(ModelBase):

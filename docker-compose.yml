@@ -18,11 +18,13 @@ services:
       - nginx_network
   # --------------------------------------------
   demo-app:
-    build: .
+    build: 
+      context: ./api
+      dockerfile: Dockerfile
     container_name: app
     volumes:
       - .dockervenv:/src/.venv
-      - .:/src
+      - ./api:/src
     ports:
       - 8000:8000
     environment:
@@ -67,10 +69,12 @@ services:
   streamlit:
     build: 
       context: ./front
+      dockerfile: Dockerfile
     container_name: streamlit
     ports:
       - 8501:8501
-    command: "run src/front/main.py"
+    # command: "run main.py"
+    tty: true
     environment:
       VIRTUAL_HOST: front.localhost
     volumes:
