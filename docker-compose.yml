@@ -33,19 +33,21 @@ services:
       - nginx_network
   # --------------------------------------------
   postgres:
-    image: postgres:14.5
+    build: 
+      context: ./postgresql
+      dockerfile: Dockerfile
     container_name: postgresql
     environment:
-      - POSTGRES_USER=haruka
-      - POSTGRES_PASSWORD=kanata
-      - POSTGRES_DB=hanpen
-      - TZ=Asia/Tokyo
+      POSTGRES_USER: haruka
+      POSTGRES_PASSWORD: kanata
+      PGPASSWORD: password
+      TZ: "Asia/Tokyo"
+      PGDATA: /var/lib/postgresql/data/tagarasu
     ports:
       - 55000:5432
     volumes:
-      - postgres:/var/lib/postgresql/data
-      - ./data/db:/var/lib/postgresql/data
-      - ./script:/docker-entrypoint-initdb.d
+      - postgres:/var/lib/postgresql/data/
+      - ./postgresql/logs:/var/log
     networks:
       - nginx_network
   # --------------------------------------------
