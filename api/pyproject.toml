@@ -3,7 +3,9 @@ name = "tagarasu"
 version = "0.1.0"
 description = ""
 authors = ["tagarasu"]
-packages = []
+packages = [
+    {include = "models"}
+]
 
 [tool.poetry.dependencies]
 python = "^3.10"
