@@ -11,6 +11,6 @@ class Users(ModelBase):
         'comment': 'ユーザーマスタ'
     }
 
-    user_id = Column(Integer, primary_key=True, autoincrement=True, comment="ユーザーID")
-    user_name = Column(Text, comment="ユーザーID", nullable=False)
+    user_id = Column(Integer, primary_key=True, autoincrement=True, comment="ユーザID", nullable=False)
+    user_name = Column(Text, comment="ユーザー名", nullable=False)
     password = Column(Text, nullable=False, comment="パスワード")

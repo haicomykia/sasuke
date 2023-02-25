@@ -6,8 +6,17 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-engine = create_engine(os.environ['DB_URL'])
+# echo=True
+engine = create_engine(os.environ['DB_URL'], echo=True)
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 ModelBase = declarative_base()
+
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
