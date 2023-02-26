@@ -4,13 +4,16 @@ version = "0.1.0"
 description = ""
 authors = ["tagarasu"]
 packages = [
-    {include = "models"}
+    {include = "models"},
+    {include = "schemas"}
 ]
 
 [tool.poetry.dependencies]
 python = "^3.10"
 numpy = "^1.23.5"
 pandas = "^1.5.2"
+passlib = {extras = ["bcrypt"], version = "^1.7.4"}
+python-jose = {extras = ["cryptography"], version = "^3.3.0"}
 
 [tool.poetry.group.api]
 optional = true

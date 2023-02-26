@@ -18,7 +18,7 @@ async def create_users(user: Users, db: Session = Depends(get_db)):
 
 
 # Read
-@app.get('/users', response_model=List[Users])
+@app.get('/users', response_model=list[Users])
 async def read_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     users = crud.get_users(db, skip=skip, limit=limit)
     return users
