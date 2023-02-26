@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 from models.m_users import Users as mUser
-from models.schemas import Users as sUser
+from schemas.schemas import Users as sUser
 
 
 # ユーザー一覧を取得

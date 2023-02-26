@@ -1,7 +1,7 @@
 from typing import List
-from fastapi import FastAPI, APIRouter, Depends
+from fastapi import FastAPI, Depends
 from sqlalchemy.orm.session import Session
-from models.schemas import Users
+from schemas.schemas import Users
 from db import database
 from db.database import engine, get_db
 import crud
