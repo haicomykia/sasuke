@@ -16,6 +16,7 @@ def main_page():
 
 def login_page():
     st.markdown('# Login Page')
+    load_dotenv()
     with st.form(key='login'):
         content: str = st.text_input('ユーザーID', max_chars=20)
         password: str = st.text_input('パスワード', type='password')
@@ -33,8 +34,8 @@ def login_page():
             )
             st.write(res.json())
 
+
 def main():
-    load_dotenv()
     page_names_to_funcs = {
         'Login Page': login_page,
         'Main Page': main_page

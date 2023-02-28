@@ -6,7 +6,7 @@ from hash.hash import Hash
 
 
 # ユーザー認証
-def verify_user(db: Session, user: sUser):
+def verify_user(db: Session, user: sUser) -> bool:
     result = db.query(mUser).filter(and_(mUser.deleted_at == None, \
                                         user.user_name == mUser.user_name)).first()
     if result is None:
