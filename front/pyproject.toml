@@ -2,7 +2,7 @@
 name = "front"
 version = "0.1.0"
 description = ""
-authors = ["Your Name <you@example.com>"]
+authors = ["tagarasu"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
@@ -59,8 +59,7 @@ urllib3 = "1.26.13"
 validators = "0.20.0"
 watchdog = "2.1.9"
 zipp = "3.11.0"
-
-
+python-dotenv = "^1.0.0"
 
 [build-system]
 requires = ["poetry-core"]
