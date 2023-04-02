@@ -5,14 +5,16 @@ from fastapi_users.authentication import (
     BearerTransport,
     JWTStrategy
 )
+from core.settings import Settings
 import crud.users as user_crud
 from models.user import User
 
-bearer_transport = BearerTransport(tokenUrl="auth/jwt/login")
 
+bearer_transport = BearerTransport(tokenUrl="auth/jwt/login")
+settings = Settings()
 
 def get_jwt_strategy() -> JWTStrategy:
-    return JWTStrategy(secret = user_crud.SECRET, lifetime_seconds=3600)
+    return JWTStrategy(secret = settings.SECRET, lifetime_seconds=3600)
 
 
 auth_backend = AuthenticationBackend(

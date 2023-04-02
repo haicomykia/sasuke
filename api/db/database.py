@@ -5,18 +5,13 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from fastapi import Depends
 from fastapi_users.db import SQLAlchemyUserDatabase
-from dotenv import load_dotenv
+from core.settings import Settings
 from models.user import User
 
-load_dotenv()
 
-# echo=True
-DATABASE_URL = os.environ['DB_URL']
+settings = Settings()
 ModelBase = declarative_base()
-
-engine = create_async_engine(DATABASE_URL, echo=True)
-
-
+engine = create_async_engine(settings.DB_URL, echo=True)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 
