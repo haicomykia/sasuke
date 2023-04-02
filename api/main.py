@@ -1,9 +1,6 @@
 from fastapi import FastAPI, Depends
-from sqlalchemy.orm.session import Session
-from db.database import engine, get_db, ModelBase
-from models import user_models
-from models.user_models import User
-from logic.users import fastapi_users, auth_backend, current_active_user
+from models.user import User
+from crud.auth import fastapi_users, auth_backend, current_active_user
 from schemas.schemas import UserRead, UserCreate, UserUpdate
 
 app = FastAPI()
