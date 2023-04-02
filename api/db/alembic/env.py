@@ -6,9 +6,10 @@ from sqlalchemy import pool
 from alembic import context
 
 from db.database import ModelBase
-from models import m_kanjo_kamoku
 from models import m_kanjo_kamoku_groups
+from models import m_kanjo_kamoku
 from models import m_salary_types
+from models import t_balances
 from models import user_models
 
 # this is the Alembic Config object, which provides

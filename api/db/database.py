@@ -18,7 +18,6 @@ engine = create_async_engine(DATABASE_URL, echo=True)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 
-
 def get_db():
     db = SessionLocal()
     try:
