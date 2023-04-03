@@ -1,13 +1,23 @@
-import sys, os
-from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
+from fastapi import FastAPI, Depends
+from fastapi_users.db import SQLAlchemyUserDatabase
+from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import sessionmaker
-from dotenv import load_dotenv
+from typing import AsyncGenerator
 
-load_dotenv()
+from core.database import engine, ModelBase
+from models.user import User
 
-engine = create_engine(os.environ['DB_URL'])
+async_session_maker = sessionmaker(engine, class_ = AsyncSession, expire_on_commit=False)
 
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+async def create_db_and_tables():
+    async with engine.begin() as conn:
+        await conn.run_sync(ModelBase.metadata.create_all)
 
-ModelBase = declarative_base()
+
+async def get_async_session() -> AsyncGenerator[AsyncSession, None]:
+    async with async_session_maker() as session:
+        yield session
+
+
+async def get_user_db(session: AsyncSession = Depends(get_async_session)):
+    yield SQLAlchemyUserDatabase(session, User)

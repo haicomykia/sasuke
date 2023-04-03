@@ -1,19 +1,20 @@
-import os
 from logging.config import fileConfig
+
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
-from alembic import context
-from dotenv import load_dotenv
-from models.models import ModelBase
-from models import m_kanjo_kamoku_groups, m_salary_types, m_kanjo_kamoku
 
-# load .env
-load_dotenv()
+from alembic import context
+
+from core.database import ModelBase
+from models import m_kanjo_kamoku_groups
+from models import m_kanjo_kamoku
+from models import m_salary_types
+from models import t_balances
+from models import user_models
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
-config.set_main_option("sqlalchemy.url", os.environ['DB_URL'])
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
@@ -64,14 +65,16 @@ def run_migrations_online() -> None:
 
     """
     connectable = engine_from_config(
-        config.get_section(config.config_ini_section),
+        config.get_section(config.config_ini_section, {}),
         prefix="sqlalchemy.",
         poolclass=pool.NullPool,
     )
 
+    url = config.get_main_option("sqlalchemy.url")
+
     with connectable.connect() as connection:
         context.configure(
-            connection=connection, target_metadata=target_metadata
+            url=url,connection=connection, target_metadata=target_metadata
         )
 
         with context.begin_transaction():

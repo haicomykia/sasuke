@@ -1,8 +1,12 @@
 from sqlalchemy import Column, Integer, Unicode
-from models.models import ModelBase
+from sqlalchemy import TIMESTAMP as Timestamp
+from sqlalchemy.sql.functions import current_timestamp
+
+from core.database import ModelBase
+from models.base import Base
 
 
-class AccountTitleGroups(ModelBase):
+class AccountTitleGroups(ModelBase, Base):
     """
     勘定科目グループマスタ
     """
@@ -13,3 +17,6 @@ class AccountTitleGroups(ModelBase):
 
     kanjo_kamoku_group_code = Column(Integer, primary_key=True, autoincrement=True, comment="勘定科目グループコード")
     group_name = Column(Unicode(100), comment="勘定科目名")
+    created_at = Column(Timestamp, default=current_timestamp(), nullable=False, comment="作成日")
+    updated_at = Column(Timestamp, default=current_timestamp(), nullable=False, comment="更新日")
+    deleted_at = Column(Timestamp, nullable=True, comment="削除日")

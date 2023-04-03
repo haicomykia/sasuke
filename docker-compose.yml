@@ -48,6 +48,7 @@ services:
     volumes:
       - postgres:/var/lib/postgresql/data/
       - ./postgresql/logs:/var/log
+#      - ./script:/docker-entrypoint-initdb.d
     networks:
       - nginx_network
   # --------------------------------------------
@@ -75,8 +76,6 @@ services:
     container_name: streamlit
     ports:
       - 8501:8501
-    # command: "run main.py"
-    tty: true
     environment:
       VIRTUAL_HOST: front.localhost
     volumes:
@@ -86,6 +85,7 @@ services:
   # --------------------------------------------
 volumes:
   postgres:
+      external: true
   pgadmin:
 networks:
   nginx_network:

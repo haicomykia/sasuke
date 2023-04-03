@@ -2,13 +2,14 @@
 name = "front"
 version = "0.1.0"
 description = ""
-authors = ["Your Name <you@example.com>"]
+authors = ["tagarasu"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
 numpy = "^1.23.5"
 pandas = "^1.5.2"
+fastapi-users = {extras = ["sqlalchemy"], version = "^10.4.1"}
 
 [tool.poetry.group.front]
 optional = true
@@ -59,8 +60,7 @@ urllib3 = "1.26.13"
 validators = "0.20.0"
 watchdog = "2.1.9"
 zipp = "3.11.0"
-
-
+python-dotenv = "^1.0.0"
 
 [build-system]
 requires = ["poetry-core"]
