@@ -6,8 +6,8 @@ from core.settings import Settings
 
 
 settings = Settings()
-ModelBase = declarative_base()
 engine = create_async_engine(settings.DB_URL, echo=True)
+ModelBase = declarative_base()
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 

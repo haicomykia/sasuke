@@ -163,6 +163,6 @@ cython_debug/
 /nginx/logs
 
 # alembic auto-generated migration files
-api/db/alembic/versions/*.py
+/api/alembic/versions/*.py
 
 data/db

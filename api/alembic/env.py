@@ -5,12 +5,13 @@ from sqlalchemy import pool
 
 from alembic import context
 
-from core.database import ModelBase
+from core.settings import Settings
+from core.database import ModelBase, engine
 from models import m_kanjo_kamoku_groups
 from models import m_kanjo_kamoku
 from models import m_salary_types
 from models import t_balances
-from models import user_models
+from models import user
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -20,6 +21,10 @@ config = context.config
 # This line sets up loggers basically.
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
+
+settings = Settings()
+uri = config.get_main_option("sqlalchemy.url")
+config.set_main_option("sqlalchemy.url", uri or settings.DB_URL)
 
 # add your model's MetaData object here
 # for 'autogenerate' support
@@ -65,17 +70,13 @@ def run_migrations_online() -> None:
 
     """
     connectable = engine_from_config(
-        config.get_section(config.config_ini_section, {}),
+        config.get_section(config.config_ini_section),
         prefix="sqlalchemy.",
         poolclass=pool.NullPool,
     )
 
-    url = config.get_main_option("sqlalchemy.url")
-
     with connectable.connect() as connection:
-        context.configure(
-            url=url,connection=connection, target_metadata=target_metadata
-        )
+        context.configure(connection=connection, target_metadata=target_metadata)
 
         with context.begin_transaction():
             context.run_migrations()

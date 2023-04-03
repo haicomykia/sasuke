@@ -5,7 +5,9 @@ description = ""
 authors = ["tagarasu"]
 packages = [
     {include = "models"},
-    {include = "schemas"}
+    {include = "schemas"},
+    {include = "core"},
+    {include = "db"}
 ]
 
 [tool.poetry.dependencies]
