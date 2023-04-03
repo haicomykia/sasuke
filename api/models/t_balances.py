@@ -1,10 +1,12 @@
 from sqlalchemy import Column, Integer, Unicode
 from sqlalchemy import TIMESTAMP as Timestamp
 from sqlalchemy.sql.functions import current_timestamp
-from db.database import ModelBase
+
+from core.database import ModelBase
+from models.base import Base
 
 
-class Balances(ModelBase):
+class Balances(ModelBase, Base):
     """
     差引残高テーブル
     """

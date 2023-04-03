@@ -5,7 +5,7 @@ from sqlalchemy import pool
 
 from alembic import context
 
-from db.database import ModelBase
+from core.database import ModelBase
 from models import m_kanjo_kamoku_groups
 from models import m_kanjo_kamoku
 from models import m_salary_types

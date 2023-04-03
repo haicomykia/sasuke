@@ -1,10 +1,11 @@
 from sqlalchemy import Column, Integer, Unicode
 from sqlalchemy import TIMESTAMP as Timestamp
 from sqlalchemy.sql.functions import current_timestamp
-from db.database import ModelBase
 
+from core.database import ModelBase
+from models.base import Base
 
-class SalaryTypes(ModelBase):
+class SalaryTypes(ModelBase, Base):
     """
     給与種別マスタ
     """

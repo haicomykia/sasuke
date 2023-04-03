@@ -1,8 +1,9 @@
 from fastapi import FastAPI, Depends
-from models.user import User
-from crud.auth import fastapi_users, auth_backend, current_active_user
-from schemas.schemas import UserRead, UserCreate, UserUpdate
+
 from core.settings import Settings
+from crud.auth import fastapi_users, auth_backend, current_active_user
+from models.user import User
+from schemas.schemas import UserRead, UserCreate, UserUpdate
 
 settings = Settings()
 app = FastAPI(
