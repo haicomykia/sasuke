@@ -6,5 +6,5 @@ from models.base import Base
 
 ModelBase: DeclarativeMeta = declarative_base()
 
-class User(SQLAlchemyBaseUserTableUUID, ModelBase, Base):
+class User(SQLAlchemyBaseUserTableUUID, ModelBase):
     pass

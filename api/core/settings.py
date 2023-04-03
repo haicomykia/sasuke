@@ -6,7 +6,7 @@ class Settings(BaseSettings):
     メンバ変数名は.envファイルのキーと同じ名前にすると値がセットされる
     """
     DB_URL: str
-    SECRET: str
+    SECRET_KEY: str
     TITLE: str
     ENV: str
     class Config:
