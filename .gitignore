@@ -166,3 +166,5 @@ cython_debug/
 api/alembic/versions/*.py
 
 data/db
+
+.vscode/
