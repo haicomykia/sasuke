@@ -10,7 +10,7 @@ settings = Settings()
 
 def show_login_form():
     """"
-    ログインフォームとログイン機構を返す　
+    ログイン機能を提供
     """
     st.markdown('# ログイン')
     with st.form(key='login'):
@@ -53,13 +53,45 @@ def show_login_form():
                 case _:
                     st.error(Error_Message.INTERNAL_SERVER_ERROR.text)
 
-def login_required(func):
+def has_authorized_user() -> bool:
     """
-    ログインフォームを表示するデコレータを定義
+    Returns
+    -------
+    bool
+        ユーザが認証されているか？
+    """
+    if 'access_token' not in st.session_state:
+        return False
+
+    access_token = st.session_state['access_token']
+
+    if access_token is None:
+        return False
+
+    url = settings.GET_CURRENT_USER
+    res = requests.get(url, headers={'Authorization' : f'Bearer {access_token}'})
+
+    match res.status_code:
+        case status.HTTP_200_OK:
+            return True
+        case _:
+            return False
+
+
+def login_required(func_authorized):
+    """
+    ユーザー認証が必須なメソッドに付与するデコレータ
+    認証されていない場合はログインフォームを出力
+
+    Parameters
+    ----------
+    func_authorized
+        ユーザーが認証されてている場合の処理
     """
     def prepare_login_form():
-        if 'access_token' in st.session_state:
-            func()
+        if has_authorized_user():
+            func_authorized()
         else:
             show_login_form()
+
     return prepare_login_form

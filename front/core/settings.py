@@ -9,6 +9,7 @@ class Settings(BaseSettings):
     AUTH_URL: str
     REGISTER_URL: str
     LOGIN_URL: str
+    GET_CURRENT_USER: str
 
 
     class Config:
