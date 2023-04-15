@@ -4,7 +4,7 @@ import requests
 import json
 
 from core.settings import Settings
-from core.functions import login_required
+from core.auth import login_required
 from exceptions.error_message import Error_Message
 
 settings = Settings()
