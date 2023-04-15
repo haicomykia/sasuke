@@ -9,5 +9,7 @@ class Settings(BaseSettings):
     SECRET_KEY: str
     TITLE: str
     ENV: str
+    EXPIRED_SECONDS: int
+
     class Config:
         env_file = '.env'

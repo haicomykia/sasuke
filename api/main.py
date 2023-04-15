@@ -1,9 +1,12 @@
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Depends, Form
 
 from core.settings import Settings
 from crud.auth import fastapi_users, auth_backend, current_active_user
 from models.user import User
 from schemas.schemas import UserRead, UserCreate, UserUpdate
+
+from endpoints import auth
+
 
 settings = Settings()
 app = FastAPI(
@@ -47,6 +50,8 @@ app.include_router(
 )
 
 
-@app.get('/')
-def index(user: User = Depends(current_active_user)):
-    return {'message', f"{user.email}"}
+app.include_router(
+    auth.router,
+    prefix="/auth",
+    tags=["auth"]
+)

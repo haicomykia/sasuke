@@ -13,9 +13,10 @@ settings = Settings()
 def main():
     st.markdown('# ユーザー登録')
 
-    with st.form(key='register', clear_on_submit=True):
-        email: str = st.text_input('ユーザーID', type='default', max_chars=20)
+    with st.form(key='register'):
+        email: str = st.text_input('ユーザーID', type='default', max_chars=128)
         password: str = st.text_input('パスワード', type='password')
+
         data = {
             'email': email,
             'password': password
@@ -34,11 +35,17 @@ def main():
                 case status.HTTP_201_CREATED:
                     st.info('ユーザーを作成しました。')
                 case status.HTTP_400_BAD_REQUEST:
-                    # ユーザーが存在する場合
-                    st.error(Error_Message.ALREADY_REGISTERED_EMAL.text)
-                case status.HTTP_422_UNPROCESSABLE_ENTITY:
-                    # バリデーションエラー
-                    pass
+                    detail = res.json()['detail']
+
+                    if 'reason' in detail:
+                        st.error(detail['reason'])
+                        return
+
+                    match detail:
+                        case 'REGISTER_USER_ALREADY_EXISTS':
+                            st.error(Error_Message.ALREADY_REGISTERED_EMAL.text)
+                        case _:
+                            st.error(Error_Message.INTERNAL_SERVER_ERROR.text)
                 case _:
                     st.error(Error_Message.INTERNAL_SERVER_ERROR.text)
 

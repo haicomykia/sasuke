@@ -100,3 +100,44 @@ def login_required(func_authorized):
             show_login_form()
 
     return prepare_login_form
+
+
+def validate_password(password: str) -> bool:
+    """
+    パスワードのバリデーションチェック
+
+    Parameters
+    -----
+    password
+        パスワード
+
+    Returns
+    -----
+    bool
+        パスワードがルールを満たしているか？
+    """
+    if len(password) < 8:
+        return False
+
+    capitalalphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    smallalphabets = "abcdefghijklmnopqrstuvwxyz"
+    symbols = """ ~`!@#$%^&*()_-+={[}]|\:;"'<,>.?/ """
+    digits = "0123456789"
+
+    cnt_cap, cnt_small, cnt_symbol, cnt_digit = 0, 0, 0, 0
+
+    for i in password:
+        if i in capitalalphabets:
+            cnt_cap = cnt_cap + 1
+        if i in smallalphabets:
+            cnt_small = cnt_small + 1
+        if i in symbols:
+            cnt_symbol = cnt_symbol + 1
+        if i in digits:
+            cnt_digit = cnt_digit + 1
+
+    if cnt_cap > 0 and cnt_small > 0 and cnt_digit > 0 and cnt_symbol > 0 \
+        and cnt_cap + cnt_small + cnt_digit + cnt_symbol == len(password):
+        return True
+
+    return False
