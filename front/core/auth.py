@@ -25,7 +25,8 @@ def show_login_form():
         if not submit_button:
             return
 
-        url = settings.LOGIN_URL
+        front_url = settings.FRONT_URL
+        url = f'{front_url}/auth/jwt/login'
         res = requests.post(
             url,
             data=data
@@ -71,7 +72,8 @@ def has_authorized_user() -> bool:
     if access_token is None:
         return False
 
-    url = settings.GET_CURRENT_USER
+    front_url = settings.FRONT_URL
+    url = f'{front_url}/user/me'
     res = requests.get(url, headers={'Authorization' : f'Bearer {access_token}'})
 
     match res.status_code:

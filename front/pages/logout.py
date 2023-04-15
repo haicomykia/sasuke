@@ -11,7 +11,7 @@ def main():
         st.info('ログインしてください。')
         return
 
-    url = '{location}/auth/jwt/logout'.format(location=settings.AUTH_URL)
+    url = '{location}/auth/jwt/logout'.format(location=settings.FRONT_URL)
     headers = {'Authorization': f'Bearer {access_token}'}
 
     res = requests.post(url, headers=headers)

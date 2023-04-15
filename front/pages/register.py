@@ -23,7 +23,8 @@ def main():
         submit_button = st.form_submit_button(label='ユーザー登録')
 
         if submit_button:
-            url = settings.REGISTER_URL
+            front_url = settings.FRONT_URL
+            url = f'{front_url}/auth/register'
             res = requests.post(
                 url,
                 data=json.dumps(data)
