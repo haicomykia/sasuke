@@ -64,5 +64,4 @@ app.include_router(
 
 @app.get('/')
 def index(user: User = Depends(current_active_user)):
-    logger.error('This is Info Message.')
     return {'result', __name__}
