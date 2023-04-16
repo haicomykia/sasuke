@@ -1,12 +1,17 @@
+import os
+from logging import getLogger
+
 from fastapi import FastAPI, Depends, Form
 
 from core.settings import Settings
+from core.logger import logger as org_logger
 from crud.auth import fastapi_users, auth_backend, current_active_user
+from endpoints import auth
 from models.user import User
 from schemas.schemas import UserRead, UserCreate, UserUpdate
 
-from endpoints import auth
-
+org_logger.init_logger()
+logger = getLogger(__name__)
 
 settings = Settings()
 app = FastAPI(
@@ -55,3 +60,9 @@ app.include_router(
     prefix="/auth",
     tags=["auth"]
 )
+
+
+@app.get('/')
+def index(user: User = Depends(current_active_user)):
+    logger.error('This is Info Message.')
+    return {'result', __name__}
