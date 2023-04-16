@@ -9,5 +9,6 @@ class Settings(BaseSettings):
     SECRET_KEY: str
     TITLE: str
     ENV: str
+
     class Config:
         env_file = '.env'

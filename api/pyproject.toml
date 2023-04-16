@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "tagarasu"
+name = "api"
 version = "0.1.0"
 description = ""
 authors = ["tagarasu"]
@@ -31,6 +31,7 @@ python-dotenv = "^0.21.0"
 psycopg2 = "^2.9.5"
 fastapi-users = {extras = ["sqlalchemy"], version = "^10.4.1"}
 sqlalchemy = {extras = ["asyncio"], version = "^2.0.7"}
+pyyaml = "^6.0"
 
 [build-system]
 requires = ["poetry-core"]

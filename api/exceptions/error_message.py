@@ -27,6 +27,9 @@ class Error_Message:
     class INCORRECT_PASSWORD_OR_EMAIL(Base_Error_Message):
         text = "ユーザーIDまたはパスワードが違います。"
 
+    class INCORRECT_PASSWORD(Base_Error_Message):
+        text = "パスワードが違います。"
+
     class ALREADY_REGISTERED_EMAL(Base_Error_Message):
         text = "登録済みのメールアドレスです。"
 
