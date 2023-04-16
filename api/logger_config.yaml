@@ -18,9 +18,13 @@ handlers:
     when: 'MIDNIGHT'
     backupCount: 7
 loggers:
-  backend:
+  production:
     level: INFO
-    handlers: [console]
+    handlers: [console, file]
+    propagate: false
+  debug:
+    level: DEBUG
+    handlers: [console, file]
     propagate: false
 root:
   level: INFO

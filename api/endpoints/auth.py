@@ -5,7 +5,6 @@ from crud.auth import fastapi_users_at_auth, auth_backend, current_active_user
 from exceptions.error_message import Error_Message
 from models.user import User
 
-
 router = APIRouter()
 
 @router.post('/authenticate', status_code=status.HTTP_200_OK)
