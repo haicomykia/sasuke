@@ -25,5 +25,5 @@ auth_backend = AuthenticationBackend(
 )
 
 
-fastapi_users = FastAPIUsers[User, uuid.UUID](user_crud.get_user_manager, [auth_backend])
-current_active_user = fastapi_users.current_user(active=True)
+fastapi_users_at_auth = FastAPIUsers[User, uuid.UUID](user_crud.get_user_manager, [auth_backend])
+current_active_user = fastapi_users_at_auth.current_user(active=True)

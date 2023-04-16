@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, Form, HTTPException, status, Response
 
 from core.hasher import verify_password
-from crud.auth import fastapi_users, auth_backend, current_active_user
+from crud.auth import fastapi_users_at_auth, auth_backend, current_active_user
 from exceptions.error_message import Error_Message
 from models.user import User
 
