@@ -1,20 +1,22 @@
 version: 1
 
 formatters:
-  simple:
-    format: '%(asctime)s [ %(levelname)s ] %(message)s at %(filename)s  %(lineno)d'
+  default:
+    format: '%(asctime)s [%(name)s] [%(levelname)s] %(message)s at %(filename)s  %(lineno)d'
     datefmt: '%Y/%m/%d %H:%M:%S %Z'
 handlers:
   console:
     class: logging.StreamHandler
     level: INFO
-    formatter: simple
+    formatter: default
     stream: ext://sys.stdout
   file:
-    class: logging.FileHandler
+    class: logging.handlers.TimedRotatingFileHandler
     level: INFO
-    filename: 'app_log.log'
-    formatter: simple
+    filename: './log/myapp.log'
+    formatter: default
+    when: 'MIDNIGHT'
+    backupCount: 7
 loggers:
   backend:
     level: INFO
