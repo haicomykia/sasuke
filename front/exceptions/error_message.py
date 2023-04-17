@@ -33,6 +33,9 @@ class Error_Message:
     class HAS_NO_PERMISSION(Base_Error_Message):
         text = "権限がありません。"
 
+    class REQUIRED_LOGIN(Base_Error_Message):
+        text = "認証情報の期限が切れています。ログインしてください。"
+
     class PASSWORD_NEEDS_AT_LEAST_STR_LEN(Base_Error_Message):
         text = "パスワードは{}文字以上必要です。"
 
