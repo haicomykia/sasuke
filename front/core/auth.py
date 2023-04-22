@@ -1,7 +1,8 @@
+from functools import wraps
+
 from fastapi import status
 import streamlit as st
 import requests
-import json
 
 from core.settings import Settings
 from exceptions.error_message import Error_Message
@@ -35,7 +36,7 @@ def show_login_form():
         match res.status_code:
             case status.HTTP_200_OK:
                 # セッションに保存
-                st.session_state['authentication_status'] = True
+                st.session_state['user_id'] = user_id
                 st.session_state['access_token'] = res.json()['access_token']
             case status.HTTP_400_BAD_REQUEST:
                 # ユーザーIDかパスワードが違う
@@ -93,9 +94,10 @@ def login_required(func_authorized):
     func_authorized
         ユーザーが認証されてている場合の処理
     """
-    def prepare_login_form():
+    @wraps(func_authorized)
+    def prepare_login_form(*args, **kwargs):
         if has_authorized_user():
-            func_authorized()
+            func_authorized(*args, **kwargs)
         else:
             show_login_form()
 

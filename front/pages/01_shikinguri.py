@@ -17,7 +17,7 @@ def main():
         submit_button = st.form_submit_button(label='作成')
         if submit_button:
             if file is None:
-                st.info('ファイルを添付してください。')
+                st.error('ファイルを添付してください。')
             else:
                 location = settings.FRONT_URL
                 post_url = f'{location}/predicate/uploadfile'

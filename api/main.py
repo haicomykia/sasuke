@@ -5,6 +5,7 @@ from fastapi import FastAPI, Depends, Form
 from core.settings import Settings
 from core.logger import logger as org_logger
 from crud.auth import fastapi_users_at_auth, auth_backend, current_active_user
+from db.database import create_db_and_tables
 from endpoints import auth, shikinguri
 from models.user import User
 from schemas.schemas import UserRead, UserCreate, UserUpdate
@@ -57,3 +58,7 @@ app.include_router(shikinguri.router, prefix="/predicate", tags=["predicate"])
 @app.get('/')
 def index(user: User = Depends(current_active_user)):
     return {'result', __name__}
+
+@app.on_event('startup')
+async def startup():
+    await create_db_and_tables()
