@@ -23,7 +23,14 @@ except Exception as e:
 
 async def get_db():
     async with session_factory() as session:
-        yield session
+        try:
+            yield session
+            await session.commit()
+        except Exception as e:
+            session.rollback()
+            raise e
+        finally:
+            await session.close()
 
 # def get_db():
 #     db = session_factory()

@@ -7,7 +7,8 @@ from alembic import context
 
 from core.settings import Settings
 from core.database import ModelBase, engine
-from models import user, t_logs, m_kanjo_kamoku_groups, m_kanjo_kamoku
+from models import user, t_logs
+from models import m_kanjo_kamoku_groups, m_kanjo_kamoku, m_sousa_types
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

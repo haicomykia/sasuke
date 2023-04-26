@@ -14,6 +14,11 @@ class UserUpdate(schemas.BaseUserUpdate):
     user_name: Optional[str]
 
 class LogsBase(BaseModel):
+    sousa_id: int
+    sousa_type: int
     program_id: str
     user_id: str
     message: str
+
+    class Config:
+        orm_mode = True

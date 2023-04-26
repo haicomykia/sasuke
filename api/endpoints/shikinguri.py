@@ -1,4 +1,3 @@
-from typing import Final
 from io import StringIO
 from logging import getLogger
 

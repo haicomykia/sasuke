@@ -9,9 +9,14 @@ from exceptions.error_message import Error_Message
 
 settings = Settings()
 
-def show_login_form():
-    """"
+
+def show_login_form() -> None:
+    """
     ログイン機能を提供
+
+    Returns
+    -------
+    None
     """
     st.markdown('# ログイン')
     with st.form(key='login'):
@@ -49,9 +54,13 @@ def show_login_form():
                     item = error['loc'][1]
                     match item:
                         case 'username':
-                            st.warning(Error_Message.REQIURED_ITEM_IS_EMTPY.text.format('ユーザーID'))
+                            st.warning(
+                                Error_Message.REQIURED_ITEM_IS_EMTPY.text.format(
+                                    'ユーザーID'))
                         case 'password':
-                            st.warning(Error_Message.REQIURED_ITEM_IS_EMTPY.text.format('パスワード'))
+                            st.warning(
+                                Error_Message.REQIURED_ITEM_IS_EMTPY.text.format(
+                                    'パスワード'))
                         case _:
                             st.warning(Error_Message.INTERNAL_SERVER_ERROR.text)
             case _:
@@ -75,7 +84,7 @@ def has_authorized_user() -> bool:
 
     front_url = settings.FRONT_URL
     url = f'{front_url}/user/me'
-    res = requests.get(url, headers={'Authorization' : f'Bearer {access_token}'})
+    res = requests.get(url, headers={'Authorization': f'Bearer {access_token}'})
 
     match res.status_code:
         case status.HTTP_200_OK:
@@ -94,6 +103,7 @@ def login_required(func_authorized):
     func_authorized
         ユーザーが認証されてている場合の処理
     """
+
     @wraps(func_authorized)
     def prepare_login_form(*args, **kwargs):
         if has_authorized_user():
@@ -139,7 +149,7 @@ def validate_password(password: str) -> bool:
             cnt_digit = cnt_digit + 1
 
     if cnt_cap > 0 and cnt_small > 0 and cnt_digit > 0 and cnt_symbol > 0 \
-        and cnt_cap + cnt_small + cnt_digit + cnt_symbol == len(password):
+            and cnt_cap + cnt_small + cnt_digit + cnt_symbol == len(password):
         return True
 
     return False
