@@ -52,7 +52,6 @@ app.include_router(
     tags=["user"]
 )
 
-
 app.include_router(shikinguri.router, prefix="/predicate", tags=["predicate"])
 
 @app.get('/')

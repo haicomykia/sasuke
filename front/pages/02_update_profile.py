@@ -64,9 +64,11 @@ def main():
             }
             res = requests.post(auth_url, data=data, headers=headers)
 
+            res_json = res.json()
+
             match res.status_code:
-                case status.HTTP_400_BAD_REQUEST:
-                    st.error('現在のパスワードが違います。')
+                case status.HTTP_401_UNAUTHORIZED:
+                    st.error(res_json['detail']['error_message'])
                     return
                 case status.HTTP_422_UNPROCESSABLE_ENTITY:
                     st.error(Error_Message.INTERNAL_SERVER_ERROR.text)
@@ -83,8 +85,7 @@ def main():
                 case status.HTTP_200_OK:
                     st.info('ユーザー設定の変更処理が完了しました。')
                 case status.HTTP_400_BAD_REQUEST:
-                    detail = res.json()['detail']
-                    st.error(detail['reason'])
+                    st.error(res_json['detail']['reason'])
                 case _:
                     st.error(Error_Message.INTERNAL_SERVER_ERROR.text)
 

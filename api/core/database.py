@@ -16,7 +16,6 @@ ModelBase = declarative_base()
 
 try:
     engine = create_async_engine(settings.DB_URL, echo=True)
-    logger.info(engine)
     session_factory = scoped_session(sessionmaker(autocommit=False, autoflush=False, bind=engine, class_=AsyncSession))
 except Exception as e:
     logger.error(f"DB connection error. detail={e}")
@@ -27,7 +26,8 @@ async def get_db():
             yield session
             await session.commit()
         except Exception as e:
-            session.rollback()
+            await session.rollback()
+            logger.error(f'details = {str(e)}')
             raise e
         finally:
             await session.close()

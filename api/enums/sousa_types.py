@@ -1,6 +1,5 @@
 from enum import Enum
 
-
 class SousaTypesEnum(Enum):
     """
     操作ログの列挙体
