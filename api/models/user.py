@@ -1,10 +1,9 @@
+from sqlalchemy import Column, String
 from fastapi_users.db import SQLAlchemyBaseUserTableUUID, SQLAlchemyUserDatabase
-from sqlalchemy.orm import DeclarativeMeta, declarative_base
 
+from core.database import ModelBase
 from models.base import Base
 
 
-ModelBase: DeclarativeMeta = declarative_base()
-
 class User(SQLAlchemyBaseUserTableUUID, ModelBase):
-    pass
+    user_name = Column(String, nullable=False, comment="ユーザー名")

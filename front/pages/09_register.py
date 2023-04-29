@@ -14,12 +14,15 @@ def main():
     st.markdown('# ユーザー登録')
 
     with st.form(key='register'):
-        email: str = st.text_input('ユーザーID', type='default', max_chars=128)
+        email: str = st.text_input('メールアドレス', max_chars=128)
         password: str = st.text_input('パスワード', type='password')
+        st.caption('※ 半角の英大文字・小文字, 記号, 数字を使って8文字以上')
+        user_name: str = st.text_input('ユーザー名', max_chars=128)
 
         data = {
             'email': email,
-            'password': password
+            'password': password,
+            'user_name': user_name
         }
         submit_button = st.form_submit_button(label='ユーザー登録')
 

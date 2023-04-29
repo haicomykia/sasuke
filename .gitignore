@@ -168,3 +168,6 @@ api/alembic/versions/*.py
 data/db
 
 .vscode/
+
+# logfile
+api/log

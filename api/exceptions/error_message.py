@@ -41,3 +41,9 @@ class Error_Message:
 
     class INVALID_CHAR_TYPE_IN_PASSWORD(Base_Error_Message):
         text = "パスワードには半角英数字と記号をいれてください。"
+
+    class EXECUTE_LOCAL_ENV_ONLY(Base_Error_Message):
+        text = "ローカル開発環境でのみ実行できます。"
+
+    class DB_INSERT_ERROR(Base_Error_Message):
+        text = "データベースへの登録中にエラーが発生しました。"
